@@ -61,7 +61,7 @@ object FacebookData {
     val pathx = "hdfs:///gaoy/facebook/"
     HDFS.removeFile(pathx)
 
-    jdbc.toDF()
+    jdbc
       .repartition(1)
       .saveAsTextFile(pathx)
 
