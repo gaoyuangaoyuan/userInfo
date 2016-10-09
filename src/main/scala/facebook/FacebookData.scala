@@ -38,6 +38,7 @@ object FacebookData {
     println("gyy-log sqlcmd " + sqlcmd)
     val jdbc = jdbcDF
       .sqlContext.sql(sqlcmd)
+      .repartition(1000)
       .rdd
       .map{x =>
         var accountinfo = ""
