@@ -24,7 +24,7 @@ object FacebookData {
 
     import sqlContext.implicits._
     val jdbcDF = sqlContext.read.format("jdbc").options(
-      Map("url" -> haha,
+      Map("url" -> "jdbc:mysql://172.31.15.181:3306/keyboard?user=readuser&password=Rju#Mc9h5%25",
         "dbtable" -> "t_sdk_user_info",
         "driver" -> "com.mysql.cj.jdbc.Driver"
       )
