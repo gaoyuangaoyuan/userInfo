@@ -16,7 +16,8 @@ object FacebookData {
   def loadFBData(sqlContext: SQLContext, path: String, ts_upper: String, ts_lower:String) = {
 
     val jdbcDF = sqlContext.read.format("jdbc").options(
-      Map("url" -> "jdbc:mysql://172.31.15.181:3306/keyboard?user=mosh&password=123456",
+//      readuser    Rju#Mc9h5%
+      Map("url" -> "jdbc:mysql://172.31.15.181:3306/keyboard?user=readuser&password=Rju#Mc9h5%",
         "dbtable" -> "t_sdk_user_info",
         "driver" -> "com.mysql.jdbc.Driver"
       )
@@ -81,14 +82,14 @@ object FacebookData {
     val sc = new SparkContext()
     val sqlContext = new SQLContext(sc)
 
-    val hadoopConf = sc.hadoopConfiguration
+   /* val hadoopConf = sc.hadoopConfiguration
     val awsAccessKeyId = args(0)
     val awsSecretAccessKey = args(1)
 
     hadoopConf.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem")
     hadoopConf.set("fs.s3n.awsAccessKeyId", awsAccessKeyId)
     hadoopConf.set("fs.s3n.awsSecretAccessKey", awsSecretAccessKey)
-
+*/
     val calToday = Calendar.getInstance()
     val today = new SimpleDateFormat("yyyy-MM-dd").format(calToday.getTime())
 
