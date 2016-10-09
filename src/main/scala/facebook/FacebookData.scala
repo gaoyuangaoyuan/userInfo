@@ -17,9 +17,6 @@ object FacebookData {
 
   def loadFBData(sc: SparkContext, path: String, ts_upper: String, ts_lower:String) = {
 
-
-
-    val sqlContext = new SQLContext(sc)
     val sqlContext = SparkSession.builder().getOrCreate()
     import sqlContext.implicits._
     val jdbcDF = sqlContext.read.format("jdbc").options(
