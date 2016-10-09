@@ -4,11 +4,11 @@ package facebook
   * Created by xm002 on 16/5/18.
   */
 
+import java.net.URLDecoder
+
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.SparkSession
-
-
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -18,10 +18,13 @@ object FacebookData {
   def loadFBData(sc: SparkContext, path: String, ts_upper: String, ts_lower:String) = {
 
     val sqlContext = SparkSession.builder().getOrCreate()
+
+    val str = "jdbc:mysql://172.31.15.181:3306/keyboard?user=readuser&password=Rju#Mc9h5%"
+    val haha = URLDecoder.decode(str.replaceAll("%", "%25"), "UTF-8")
+
     import sqlContext.implicits._
     val jdbcDF = sqlContext.read.format("jdbc").options(
-//      readuser    Rju#Mc9h5%
-      Map("url" -> "jdbc:mysql://172.31.15.181:3306/keyboard?user=readuser&password=Rju#Mc9h5\\%",
+      Map("url" -> haha,
         "dbtable" -> "t_sdk_user_info",
         "driver" -> "com.mysql.cj.jdbc.Driver"
       )
