@@ -16,6 +16,7 @@ object FacebookData {
   def loadFBData(sqlContext: SQLContext, path: String, ts_upper: String, ts_lower:String) = {
 
     import sqlContext.implicits._
+    import sqlContext.sql
 
     val jdbcDF = sqlContext.read.format("jdbc").options(
 //      readuser    Rju#Mc9h5%
