@@ -6,13 +6,13 @@ scalaVersion := "2.11.8"
 
 
 // http://mvnrepository.com/artifact/org.apache.spark/spark-core_2.11
-libraryDependencies += "org.apache.spark" % "spark-core_2.11" % "1.6.1" % "provided"
+libraryDependencies += "org.apache.spark" % "spark-core_2.11" % "2.0.0" % "provided"
 
 // http://mvnrepository.com/artifact/org.apache.spark/spark-mllib_2.11
-libraryDependencies += "org.apache.spark" % "spark-mllib_2.11" % "1.6.1" % "provided"
+libraryDependencies += "org.apache.spark" % "spark-mllib_2.11" % "2.0.0" % "provided"
 
 // http://mvnrepository.com/artifact/org.apache.spark/spark-sql_2.11
-libraryDependencies += "org.apache.spark" % "spark-sql_2.11" % "1.6.1" % "provided"
+libraryDependencies += "org.apache.spark" % "spark-sql_2.11" % "2.0.0" % "provided"
 
 libraryDependencies += "org.json" % "json" % "20160212"
 
