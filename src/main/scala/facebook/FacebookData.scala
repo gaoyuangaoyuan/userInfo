@@ -33,7 +33,7 @@ object FacebookData {
     jdbcDF.createOrReplaceTempView("names")
 
 
-    val sqlcmd = "select id,device_uid,account_id,account_info, package_name from names limit 10"
+    val sqlcmd = "select id,device_uid,account_id,account_info, package_name from names"
 
     println("gyy-log sqlcmd " + sqlcmd)
     val jdbc = jdbcDF
@@ -52,7 +52,7 @@ object FacebookData {
               accountinfo = ""
           }
 
-        x(0) + "\t" +  x(1) + "\t" + x(2) + "\t" + accountinfo + "\t" +  x(4)
+        x(0) + "\t" +  x(1) + "\t" + x(2) + "\t" +  x(4) + "\t" + accountinfo
       }
 
     println(s"#### count ${jdbc.count()}")
@@ -62,7 +62,6 @@ object FacebookData {
     HDFS.removeFile(pathx)
 
     jdbc
-      .repartition(1)
       .saveAsTextFile(pathx)
 
   }
