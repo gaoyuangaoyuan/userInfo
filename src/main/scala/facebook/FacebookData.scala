@@ -21,17 +21,14 @@ object FacebookData {
     import sqlContext.implicits._
     val jdbcDF = sqlContext.read.format("jdbc").options(
 //      readuser    Rju#Mc9h5%
-      Map("url" -> "jdbc:mysql://172.31.15.181:3306/keyboard?user=readuser&password=Rju#Mc9h5%",
+      Map("url" -> "jdbc:mysql://172.31.15.181:3306/keyboard?user=readuser&password=Rju#Mc9h5\%",
         "dbtable" -> "t_sdk_user_info",
-        "driver" -> "com.mysql.jdbc.Driver"
+        "driver" -> "com.mysql.cj.jdbc.Driver"
       )
     ).load()
 
-    jdbcDF.registerTempTable("names")
+    jdbcDF.createOrReplaceTempView("names")
 
-//    val sqlcmd = "select id,device_uid,account_id,account_info from names where  create_time > '" + ts_lower + "' and create_time < '" + ts_upper + "'"
-
-//    val sqlcmd = "select id,device_uid,account_id,account_info, package_name from names where account_info != \"\" and create_time < '" + ts_upper + "'"
 
     val sqlcmd = "select id,device_uid,account_id,account_info, package_name from names limit 10"
 
