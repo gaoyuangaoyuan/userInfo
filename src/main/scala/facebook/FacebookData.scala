@@ -33,7 +33,7 @@ object FacebookData {
     jdbcDF.createOrReplaceTempView("names")
 
 
-    val sqlcmd = "select id,device_uid,account_id,account_info, package_name from names where create_time > '2015-10-10 00:00:00'"
+    val sqlcmd = "select id,device_uid,account_id,account_info, package_name from names"
 
     println("gyy-log sqlcmd " + sqlcmd)
     val jdbc = jdbcDF
