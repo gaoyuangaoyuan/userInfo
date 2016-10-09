@@ -38,6 +38,7 @@ object FacebookData {
     println("gyy-log sqlcmd " + sqlcmd)
     val jdbc = jdbcDF
       .sqlContext.sql(sqlcmd)
+      .rdd
       .map{x =>
         var accountinfo = ""
         try
@@ -60,7 +61,7 @@ object FacebookData {
     val pathx = "hdfs:///gaoy/facebook/"
     HDFS.removeFile(pathx)
 
-    jdbc
+    jdbc.toDF()
       .repartition(1)
       .saveAsTextFile(pathx)
 
