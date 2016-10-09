@@ -6,6 +6,8 @@ package facebook
 
 import org.apache.spark.SparkContext
 import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.SparkSession
+
 
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -13,11 +15,13 @@ import java.util.Calendar
 
 object FacebookData {
 
-  def loadFBData(sqlContext: SQLContext, path: String, ts_upper: String, ts_lower:String) = {
+  def loadFBData(sc: SparkContext, path: String, ts_upper: String, ts_lower:String) = {
 
+
+
+    val sqlContext = new SQLContext(sc)
+    val sqlContext = SparkSession.builder().getOrCreate()
     import sqlContext.implicits._
-    import sqlContext.sql
-
     val jdbcDF = sqlContext.read.format("jdbc").options(
 //      readuser    Rju#Mc9h5%
       Map("url" -> "jdbc:mysql://172.31.15.181:3306/keyboard?user=readuser&password=Rju#Mc9h5%",
@@ -83,29 +87,16 @@ object FacebookData {
   def main(args: Array[String]) {
 
     val sc = new SparkContext()
-    val sqlContext = new SQLContext(sc)
 
-   /* val hadoopConf = sc.hadoopConfiguration
-    val awsAccessKeyId = args(0)
-    val awsSecretAccessKey = args(1)
-
-    hadoopConf.set("fs.s3n.impl", "org.apache.hadoop.fs.s3native.NativeS3FileSystem")
-    hadoopConf.set("fs.s3n.awsAccessKeyId", awsAccessKeyId)
-    hadoopConf.set("fs.s3n.awsSecretAccessKey", awsSecretAccessKey)
-*/
     val calToday = Calendar.getInstance()
     val today = new SimpleDateFormat("yyyy-MM-dd").format(calToday.getTime())
 
     calToday.add(Calendar.DATE, -7)
     val lastweek = new SimpleDateFormat("yyyy-MM-dd").format(calToday.getTime())
 
-//    val path = "s3n://xinmei-dataanalysis/fb/" + today
-//    println("gyy-log path " + path)
-//    AWS.removeFile("xinmei-dataanalysis","fb/" + today)
-
     val path = "/gaoy/facebook/"
 
-    loadFBData(sqlContext, path,today, lastweek)
+    loadFBData(sc, path,today, lastweek)
 
     sc.stop()
 
