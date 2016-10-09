@@ -54,7 +54,7 @@ object FacebookData {
           }
 
         x(0) + "\t" +  x(1) + "\t" + x(2) + "\t" +  x(4) + "\t" + accountinfo
-      }
+      }.cache()
 
     println(s"#### count ${jdbc.count()}")
 //    val pathx = "hdfs:///gaoy/" + ts_upper + "/"
